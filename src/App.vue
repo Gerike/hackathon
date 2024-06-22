@@ -6,6 +6,7 @@ import {useMessageStore} from "@/stores/message.js";
 import { useTicketStore } from "@/stores/ticket.js";
 import {onUpdated} from "vue";
 import LogoFullDark from "@/components/icons/LogoFullDark.vue";
+import MessageIcon from "@/components/icons/MessageIcon.vue";
 
 const ticketStore = useTicketStore();
 const messageStore = useMessageStore();
@@ -50,14 +51,13 @@ onUpdated(() => {
       <div class="ticketPanel">
         <div class="ticketPanelHeader">
           <div class="logo">
-            AssisSteve
+
           </div>
-          <div ></div>
+        </div>
+        <div class="ticketPanelList">
           <div class="search">
             <input type="text" class="searchTerm" placeholder="Search" @keyup="e => ticketStore.setFilterWord(e.target.value)">
           </div>
-        </div>
-        <div class="ticketPanelTicketList">
           <div class="recent">Recent</div>
           <TicketItem v-for="ticket in ticketStore.getTickets()"
             :msg="ticket.name"
@@ -69,8 +69,13 @@ onUpdated(() => {
       </div>
       <div class="chatPanel">
         <div class="chatPanelTitle">
-          <div class="chatPanelTitleMessage">{{ ticketStore.getSelectedTicket() ? ticketStore.getSelectedTicket().name : ''}}</div>
-          <div class="chatPanelTitleDate">{{ ticketStore.getSelectedTicket() ? ticketStore.getSelectedTicket().date : '' }}</div>
+          <div class="chatPanelHeader">
+              <div class="messageIcon">
+                <message-icon></message-icon>
+              </div>
+              <div class="chatPanelTitleMessage">{{ ticketStore.getSelectedTicket() ? ticketStore.getSelectedTicket().name : ''}}</div>
+              <div class="chatPanelTitleDate">{{ ticketStore.getSelectedTicket() ? ticketStore.getSelectedTicket().date : '' }}</div>
+          </div>
         </div>
         <div id="chatPanelTextArea" class="chatPanelTextArea">
           <ChatPanelMessage
@@ -101,43 +106,52 @@ body {
   --highlight: #D9D9DA;
   --border: #D9D9DA;
   --logo-light: #48FED5;
+  --text-color-light: #030D14;
 }
 </style>
 
 
 <style scoped>
 .logo {
-  padding-top: 10px;
   padding-left: 10px;
   background-color: var(--logo-light);
   border-bottom: 1px solid var(--border);
-  height: 50px;
+  height: 65px;
 }
 
-.logo-svg {
-  transform: scale(0.5);
-}
 
 .recent {
-  padding: 5px;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: var(--text-color-light);
 }
 
 .chatPanelTitle {
+  display: flex;
   width: 100%;
-  height: 50px;
+  height: 65px;
   background-color: var(--background-dark);
   border-bottom: var(--border);
-  padding-top: 10px;
-  padding-left: 10px;
+}
+
+.chatPanelHeader {
+  padding: 8px 20px 8px 20px;
+  display: flex;
+  flex-basis: 50%;
 }
 
 .chatPanelTextArea {
-  height: calc(90% - 50px);
-  padding: 10px;
+  box-sizing: border-box;
+  padding: 20px;
+  height: calc(100% - 65px - 72px);
   overflow: scroll;
 }
 .chatBoxInput {
-  width: 80%;
+  width: 100%;
+  box-sizing: border-box;
   align-items: center;
   margin-left: auto;
   margin-right: auto;
@@ -147,16 +161,21 @@ body {
 }
 
 .chatPanelControls {
-  height: calc(10% - 50px);
+  box-sizing: border-box;
+  padding: 16px 20px 16px 20px;
+  height: 72px;
   width: 100%;
-  padding: 10px;
   display: flex;
   border-top: solid 1px var(--border);
   background-color: var(--background-dark);
 }
 
 .chatPanelTitleMessage {
-  font-weight: bold;
+  font-weight: 600;
+}
+
+.chatPanelTitleDate {
+  font-weight: 400;
 }
 
 .wrapper {
@@ -166,15 +185,16 @@ body {
 
 .ticketPanel {
   margin: 0;
-  flex: 10%;
+  width: 350px;
   background-color: var(--background-dark);
   border-right: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
 
-.ticketPanelHeader {
-  border-bottom: 1px solid var(--border);
+.ticketPanelList {
+  padding: 16px;
 }
+
 
 .ticketPanelHeader h3 {
   font-size: 24px;
@@ -183,16 +203,14 @@ body {
 }
 
 .search {
-  padding-top: 16px;
-  padding-left: 32px;
-  padding-bottom: 16px;
   width: 100%;
+  margin: auto;
   position: relative;
   display: flex;
 }
 
 .searchTerm {
-  width: 80%;
+  width: 100%;
   border: 1px solid var(--border);
   padding: 5px;
   font-size: 16px;
@@ -209,6 +227,6 @@ body {
 }
 
 .chatPanel {
-  flex: 60%;
+  width: 100%;
 }
 </style>

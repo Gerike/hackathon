@@ -13,60 +13,68 @@ const props = defineProps({
   selected: {
     type: Boolean
   }
-})
+});
+
+const CHARACTER_LIMIT = 40;
 
 const createTitle = () => {
-  if (props.msg.length < 20) {
+  if (props.msg.length < CHARACTER_LIMIT) {
     return props.msg;
   }
-  return `${props.msg.slice(0, 17)}...`;
+  return `${props.msg.slice(0, CHARACTER_LIMIT-3)}...`;
 }
 </script>
 
 <template>
   <div class="ticketBox" :class="selected ? 'selected' : ''">
-    <div class="messageIcon">
-      <message-icon></message-icon>
-    </div>
-    <div class="ticketContent">
-      <div class="ticketMessage">{{ createTitle() }}</div>
-      <div class="ticketDate">{{ date }}</div>
+    <div class="ticketContentBox">
+      <div class="messageIcon">
+        <message-icon></message-icon>
+      </div>
+      <div class="ticketContent">
+        <div class="ticketMessage">{{ createTitle() }}</div>
+        <div class="ticketDate">{{ date }}</div>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
 .ticketBox {
-  width: 80%;
-  padding: 5px;
+  width: 318px;
+  height: 49px;
+}
+
+.ticketContentBox {
+  padding: 8px 12px 8px 12px;
+  width: 100%;
   display: flex;
-  margin: 5px;
-  margin-left: 15px;
   flex-basis: 50%;
 }
 
-.messageIcon {
-  margin: 5px;
-  padding: 5px;
-  color: red !important;
-}
 
 .ticketContent {
-  margin-left: 15px;
+  margin-left: 5px;
 }
 
 .ticketBox:hover {
   background-color: var(--message-light);
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .ticketMessage {
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.ticketDate {
+  font-weight: 400;
+  font-size: 14px;
 }
 
 .selected {
   background-color: var(--highlight);
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 </style>

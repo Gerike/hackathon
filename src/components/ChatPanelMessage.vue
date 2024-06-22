@@ -20,9 +20,10 @@ defineProps({
 
 <style scoped>
 .messageBox {
+  box-sizing: border-box;
   width: 60%;
-  border-radius: 10px;
-  padding: 10px;
+  border-radius: 8px;
+  padding: 12px;
   margin-top: 10px;
 }
 
