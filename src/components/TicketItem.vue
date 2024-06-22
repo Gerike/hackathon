@@ -1,5 +1,6 @@
 <script setup>
 import MessageIcon from "@/components/icons/MessageIcon.vue";
+import PlaceHolderIcon from "@/components/icons/TrashIcon.vue";
 
 const props = defineProps({
   msg: {
@@ -35,6 +36,9 @@ const createTitle = () => {
         <div class="ticketMessage">{{ createTitle() }}</div>
         <div class="ticketDate">{{ date }}</div>
       </div>
+      <div class="messageIconEnd">
+        <place-holder-icon></place-holder-icon>
+      </div>
     </div>
   </div>
 </template>
@@ -43,6 +47,14 @@ const createTitle = () => {
 .ticketBox {
   width: 318px;
   height: 49px;
+}
+
+
+.messageIconEnd {
+  align-self: center;
+  margin-right: 16px;
+  margin-left: auto;
+  cursor: pointer;
 }
 
 .ticketContentBox {

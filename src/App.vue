@@ -4,10 +4,12 @@ import TicketItem from "@/components/TicketItem.vue";
 import ChatPanelMessage from "@/components/ChatPanelMessage.vue";
 import {useMessageStore} from "@/stores/message.js";
 import { useTicketStore } from "@/stores/ticket.js";
-import {onUpdated} from "vue";
-import LogoFullDark from "@/components/icons/LogoFullDark.vue";
+import {onUpdated, ref} from "vue";
 import MessageIcon from "@/components/icons/MessageIcon.vue";
-import PlaceHolderIcon from "@/components/icons/PlaceHolderIcon.vue";
+import PlaceHolderIcon from "@/components/icons/TrashIcon.vue";
+import ProfileIcon from "@/components/icons/ProfileIcon.vue";
+import ThemeIcon from "@/components/icons/ThemeIcon.vue";
+import Logout from "@/components/icons/Logout.vue";
 
 const ticketStore = useTicketStore();
 const messageStore = useMessageStore();
@@ -42,11 +44,11 @@ const scrollToLastMessage = () => {
   messageContainers[messageContainers.length-1].scrollIntoView();
 }
 
-let isLightTheme = true;
+let isLightTheme = ref(true);
 
 const switchTheme = () => {
-  isLightTheme = !isLightTheme;
-  console.log(isLightTheme);
+  isLightTheme.value = !isLightTheme.value;
+  document.documentElement.setAttribute("data-theme", isLightTheme.value ? 'light' : 'dark');
 }
 
 onUpdated(() => {
@@ -59,7 +61,8 @@ onUpdated(() => {
       <div class="ticketPanel">
         <div class="ticketPanelHeader">
           <div class="logo">
-            <img src="./assets/logo.svg" width="150px"/>
+            <img v-if="isLightTheme" alt="Logo" src="./assets/logo.svg" width="150px"/>
+            <img v-else alt="Logo" src="./assets/logo_dark.svg" width="150px"/>
           </div>
         </div>
         <div class="ticketPanelList">
@@ -86,9 +89,9 @@ onUpdated(() => {
               </div>
               <div class="chatPanelTitleMessage">{{ ticketStore.getSelectedTicket() ? ticketStore.getSelectedTicket().name : ''}}</div>
           <div class="chatPanelSettings">
-            <div class="action-icon"><place-holder-icon></place-holder-icon></div>
-            <div class="action-icon" @click="switchTheme"><place-holder-icon></place-holder-icon></div>
-            <div class="action-icon"><place-holder-icon></place-holder-icon></div>
+            <div class="action-icon" @click="switchTheme"><theme-icon></theme-icon></div>
+            <div class="action-icon"><profile-icon></profile-icon></div>
+            <div class="action-icon"><logout></logout></div>
           </div>
           </div>
         <div id="chatPanelTextArea" class="chatPanelTextArea">
@@ -108,11 +111,6 @@ onUpdated(() => {
     </div>
 </template>
 <style>
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;;
-}
-
 :root {
   --background-dark: #F2F2F2;
   --background-light: white;
@@ -123,6 +121,23 @@ body {
   --logo-light: #48FED5;
   --text-color-light: #030D14;
 }
+
+:root[data-theme="dark"] {
+    --background-dark: #030F17;
+    --background-light: #051826;
+    --message-light: #289D8C;
+    --message-dark: #054F4F;
+    --highlight: #054F4F;
+    --border: #7A7F7F;
+    --logo-light: #48FED5;
+    --text-color-light: white;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-color-light);
+}
 </style>
 
 <style scoped>
@@ -130,8 +145,7 @@ body {
   display: flex;
   box-sizing: border-box;
   width: 100%;
-  height: 100%;
-  padding: 12px 20px 0px 20px;
+  padding: 12px 20px 0 20px;
 }
 
 .newChatButton {
@@ -180,6 +194,7 @@ body {
   align-self: center;
   margin-right: 12px;
 }
+
 .chatPanelTitle {
   box-sizing: border-box;
   display: flex;
@@ -203,6 +218,7 @@ body {
   padding: 20px;
   height: calc(100% - 65px - 72px);
   overflow: scroll;
+  background-color: var(--background-light);
 }
 .chatBoxInput {
   background: var(--background-light) url("./assets/send icon.svg") no-repeat right;
@@ -215,6 +231,7 @@ body {
   padding: 10px;
   border-radius: 10px;
   border: solid 1px var(--border);
+  color: var(--text-color-light);
 }
 
 .chatPanelControls {
@@ -242,7 +259,6 @@ body {
   width: 350px;
   background-color: var(--background-dark);
   border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
 }
 
 .ticketPanelList {
