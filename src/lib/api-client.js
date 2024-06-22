@@ -12,7 +12,6 @@ export class ApiClient {
             })
         });
 
-        console.log(response);
         const data = await response.json()
 
         return data.data;

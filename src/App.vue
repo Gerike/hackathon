@@ -36,6 +36,7 @@ messageStore.addMessage(3, { fromBot: true, message: 'Praesent nec diam maximus,
 const askQuestion = (e) => {
   const question = e.target.value;
   messageStore.addMessage(ticketStore.selectedTicket, { fromBot: false, message: question });
+  messageStore.addLoadingMessage(ticketStore.selectedTicket);
   forceUpdate();
   e.target.value = '';
   setTimeout(scrollToLastMessage, 50);

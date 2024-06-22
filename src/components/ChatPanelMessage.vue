@@ -13,6 +13,7 @@ const props = defineProps({
 })
 
 const isFeedbackMessage = props.msg.split('\n')[0] === 'feedback';
+const isLoadingMessage = props.msg === 'loading';
 const relevantTickets = [];
 
 const createFeedbackMessageContent = () => {
@@ -24,7 +25,6 @@ const createFeedbackMessageContent = () => {
         const [id, ...title] = relevantTicketInfo.split(' ')
         return {id, title: title.join(' ')}
       }));
-  console.log(relevantTickets);
 }
 
 if (isFeedbackMessage) {
@@ -35,14 +35,15 @@ const ZENDESK_TICKET_URL = 'https://www.zendesk.com/tickets'
 </script>
 
 <template>
-  <div v-if="!isFeedbackMessage" class="messageBox" :class="leftAlign ? 'left-aligned' : 'right-aligned'">{{ msg }}</div>
-  <div v-else class="messageBox" :class="leftAlign ? 'left-aligned' : 'right-aligned'">
+  <div v-if="isFeedbackMessage" class="messageBox" :class="leftAlign ? 'left-aligned' : 'right-aligned'">
     <div class="link-container" v-for="ticket in relevantTickets">
       <div class="link">●  #{{ ticket.id }}: <a target="_blank" :href="`${ZENDESK_TICKET_URL}/${ticket.id}`" ><strong>{{ ticket.title }}</strong> <img alt="external-link" src="../assets/external-link.svg" width="16px"/></a></div>
       <div class="feedback-button approve-button"><img alt="external-link" src="../assets/thumbs-up.svg" width="16px"/>Approve</div>
       <div class="feedback-button ignore-button"><img alt="external-link" src="../assets/thumbs-down.svg" width="16px"/>Ignore</div>
     </div>
   </div>
+  <div v-else-if="isLoadingMessage" class="messageBox" :class="leftAlign ? 'left-aligned' : 'right-aligned'"><div class="loader"></div>Help is coming</div>
+  <div v-else class="messageBox" :class="leftAlign ? 'left-aligned' : 'right-aligned'">{{ msg }}</div>
 </template>
 
 <style scoped>
@@ -51,6 +52,24 @@ a, a:hover, a:visited {
   border:none;
   text-decoration:none;
   color:inherit;
+}
+
+.loader {
+  width: 60px;
+  aspect-ratio: 4;
+  --_g: no-repeat radial-gradient(circle closest-side,#000 90%,#0000);
+  background:
+      var(--_g) 0%   50%,
+      var(--_g) 50%  50%,
+      var(--_g) 100% 50%;
+  background-size: calc(100%/3) 100%;
+  animation: l7 1s infinite linear;
+  margin-bottom: 5px;
+}
+@keyframes l7 {
+  33%{background-size:calc(100%/3) 0%  ,calc(100%/3) 100%,calc(100%/3) 100%}
+  50%{background-size:calc(100%/3) 100%,calc(100%/3) 0%  ,calc(100%/3) 100%}
+  66%{background-size:calc(100%/3) 100%,calc(100%/3) 100%,calc(100%/3) 0%  }
 }
 
 .link {
