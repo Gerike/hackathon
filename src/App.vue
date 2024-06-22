@@ -5,7 +5,6 @@ import ChatPanelMessage from "@/components/ChatPanelMessage.vue";
 import {useMessageStore} from "@/stores/message.js";
 import { useTicketStore } from "@/stores/ticket.js";
 import {onUpdated} from "vue";
-import LogoLight from "@/components/icons/LogoFullLight.vue";
 import LogoFullDark from "@/components/icons/LogoFullDark.vue";
 
 const ticketStore = useTicketStore();
@@ -51,7 +50,7 @@ onUpdated(() => {
       <div class="ticketPanel">
         <div class="ticketPanelHeader">
           <div class="logo">
-            <logo-full-dark class="logo-svg"></logo-full-dark>
+            AssisSteve
           </div>
           <div ></div>
           <div class="search">
@@ -59,6 +58,7 @@ onUpdated(() => {
           </div>
         </div>
         <div class="ticketPanelTicketList">
+          <div class="recent">Recent</div>
           <TicketItem v-for="ticket in ticketStore.getTickets()"
             :msg="ticket.name"
             :date="ticket.date"
@@ -107,13 +107,19 @@ body {
 
 <style scoped>
 .logo {
+  padding-top: 10px;
+  padding-left: 10px;
   background-color: var(--logo-light);
-  padding: 10px;
   border-bottom: 1px solid var(--border);
+  height: 50px;
 }
 
 .logo-svg {
   transform: scale(0.5);
+}
+
+.recent {
+  padding: 5px;
 }
 
 .chatPanelTitle {
