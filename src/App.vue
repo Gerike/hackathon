@@ -42,6 +42,13 @@ const scrollToLastMessage = () => {
   messageContainers[messageContainers.length-1].scrollIntoView();
 }
 
+let isLightTheme = true;
+
+const switchTheme = () => {
+  isLightTheme = !isLightTheme;
+  console.log(isLightTheme);
+}
+
 onUpdated(() => {
   scrollToLastMessage();
 })
@@ -52,7 +59,7 @@ onUpdated(() => {
       <div class="ticketPanel">
         <div class="ticketPanelHeader">
           <div class="logo">
-
+            <img src="./assets/logo.svg" width="150px"/>
           </div>
         </div>
         <div class="ticketPanelList">
@@ -76,7 +83,7 @@ onUpdated(() => {
               <div class="chatPanelTitleMessage">{{ ticketStore.getSelectedTicket() ? ticketStore.getSelectedTicket().name : ''}}</div>
           <div class="chatPanelSettings">
             <div class="action-icon"><place-holder-icon></place-holder-icon></div>
-            <div class="action-icon"><place-holder-icon></place-holder-icon></div>
+            <div class="action-icon" @click="switchTheme"><place-holder-icon></place-holder-icon></div>
             <div class="action-icon"><place-holder-icon></place-holder-icon></div>
           </div>
           </div>
@@ -130,8 +137,9 @@ body {
   background-color: #48FED5;
 }
 .logo {
-  padding-left: 10px;
-  background-color: var(--logo-light);
+  box-sizing: border-box;
+  padding: 16px 20px 16px 20px;
+  background-color: var(--background-dark);
   border-bottom: 1px solid var(--border);
   height: 65px;
 }
