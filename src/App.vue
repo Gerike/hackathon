@@ -14,9 +14,9 @@ import ChatPanelMessage from "@/components/ChatPanelMessage.vue";
           </div>
         </div>
         <div class="ticketPanelTicketList">
-          <TicketItem date="2024.01.01" msg="Ticket 1 title...."></TicketItem>
-          <TicketItem date="2024.01.01" msg="Ticket 2 title...."></TicketItem>
-          <TicketItem date="2024.01.01" msg="Ticket 3 title...."></TicketItem>
+          <TicketItem date="14:32, 22 June" msg="Ticket 1 title...."></TicketItem>
+          <TicketItem date="14:32, 22 June" msg="Ticket 2 title...."></TicketItem>
+          <TicketItem date="14:32, 22 June" msg="Ticket 3 title...."></TicketItem>
         </div>
       </div>
       <div class="chatPanel">
@@ -97,7 +97,7 @@ body {
 .ticketPanelHeader h3 {
   font-size: 24px;
   font-weight: 600;
-  padding: 16px;
+  padding-left: 16px;
 }
 
 .search {

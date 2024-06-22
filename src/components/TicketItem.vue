@@ -15,29 +15,41 @@ defineProps({
 
 <template>
   <div class="ticketBox">
-    <icon-community class="messageIcon"></icon-community>
-    <span class="ticketMessage">{{ msg }}</span>
+    <div class="messageIcon">
+      <icon-community></icon-community>
+    </div>
+    <div class="ticketContent">
+      <div class="ticketMessage">{{ msg }}</div>
+      <div class="ticketDate">{{ date }}</div>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .ticketBox {
   width: 80%;
+  display: flex;
   margin: 5px;
+  margin-left: 15px;
+  flex-basis: 50%;
 }
 
 .messageIcon {
-  display: inline;
-  margin: 5px
+  margin: 5px;
+  padding: 5px;
 }
 
-.ticketMessage {
-  margin: auto;
+.ticketContent {
+  margin-left: 15px;
 }
 
 .ticketBox:hover {
   background-color: #797979;
   border-radius: 10px;
+}
+
+.ticketMessage {
+  font-weight: bold;
 }
 
 </style>

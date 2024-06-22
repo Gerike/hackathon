@@ -20,7 +20,6 @@ defineProps({
 
 <style scoped>
 .messageBox {
-
   width: 60%;
   border-radius: 10px;
   padding: 10px;
