@@ -28,6 +28,7 @@ defineProps({
 <style scoped>
 .ticketBox {
   width: 80%;
+  padding: 5px;
   display: flex;
   margin: 5px;
   margin-left: 15px;
@@ -44,7 +45,7 @@ defineProps({
 }
 
 .ticketBox:hover {
-  background-color: #797979;
+  background-color: var(--highlight);
   border-radius: 10px;
 }
 

@@ -38,21 +38,32 @@ import ChatPanelMessage from "@/components/ChatPanelMessage.vue";
 body {
   margin: 0;
 }
+
+:root {
+  --background-dark: #D9D9DA;
+  --background-light: white;
+  --message-light: #D6F2EE;
+  --message-dark: #289D8C;
+  --highlight: #656565;
+  --border: black;
+}
 </style>
 
 
 <style scoped>
+
 .chatPanelTitle {
   width: 100%;
   height: 50px;
-  background-color: #D9D9DA;
-  border-bottom: 1px solid black;
+  background-color: var(--background-dark);
+  border-bottom: var(--border);
   padding-top: 10px;
   padding-left: 10px;
 }
 
 .chatPanelTextArea {
   height: calc(90% - 50px);
+  padding: 10px;
 }
 .chatBoxInput {
   width: 80%;
@@ -61,7 +72,7 @@ body {
   margin-right: auto;
   padding: 10px;
   border-radius: 10px;
-  border: 1px solid black;
+  border: solid 1px var(--border);
 }
 
 .chatPanelControls {
@@ -69,8 +80,8 @@ body {
   width: 100%;
   padding: 10px;
   display: flex;
-  border-top: 1px solid black;
-  background-color: white;
+  border-top: solid 1px var(--border);
+  background-color: var(--background-dark);
 }
 
 .chatPanelTitleMessage {
@@ -85,9 +96,9 @@ body {
 .ticketPanel {
   margin: 0;
   flex: 40%;
-  background-color: #D9D9DA;
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
+  background-color: var(--background-dark);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .ticketPanelHeader {
@@ -110,12 +121,11 @@ body {
 
 .searchTerm {
   width: 80%;
-  border: 1px solid #797979;
+  border: 1px solid var(--border);
   padding: 5px;
   font-size: 16px;
   border-radius: 10px;
   outline: none;
-  color: #9DBFAF;
 }
 
 .searchTerm:focus {
@@ -125,11 +135,6 @@ body {
 .searchTerm:focus{
   color: #292929;
 }
-.divider {
-  width: 100%;
-}
-
-
 
 .chatPanel {
   flex: 60%;

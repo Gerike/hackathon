@@ -29,11 +29,11 @@ defineProps({
 .left-aligned {
   margin-left: 10px;
   color: black;
-  background-color: #D6F2EE;
+  background-color: var(--message-light);
 }
 
 .right-aligned {
-  background-color: #289D8C;
+  background-color: var(--message-dark);
   color: white;
   margin-left: auto;
   margin-right: 10px
