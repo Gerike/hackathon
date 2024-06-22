@@ -4,7 +4,7 @@ import TicketItem from "@/components/TicketItem.vue";
 import ChatPanelMessage from "@/components/ChatPanelMessage.vue";
 import {useMessageStore} from "@/stores/message.js";
 import { useTicketStore } from "@/stores/ticket.js";
-import {onUpdated, ref} from "vue";
+import {nextTick, onUpdated, ref} from "vue";
 import MessageIcon from "@/components/icons/MessageIcon.vue";
 import PlaceHolderIcon from "@/components/icons/TrashIcon.vue";
 import ProfileIcon from "@/components/icons/ProfileIcon.vue";
@@ -13,6 +13,8 @@ import Logout from "@/components/icons/Logout.vue";
 
 const ticketStore = useTicketStore();
 const messageStore = useMessageStore();
+
+const shouldRender = ref(true);
 
 ticketStore.fetchTickets();
 ticketStore.selectFirstTicket();
@@ -32,16 +34,16 @@ messageStore.addMessage(3, { fromBot: true, message: 'Praesent nec diam maximus,
 const askQuestion = (e) => {
   const question = e.target.value;
   messageStore.addMessage(ticketStore.selectedTicket, { fromBot: false, message: question });
-  const selectedTicket = ticketStore.selectedTicket;
-  ticketStore.selectTicket(null);
-  ticketStore.selectTicket(selectedTicket);
+  forceUpdate();
   e.target.value = '';
   setTimeout(scrollToLastMessage, 50);
 }
 
 const scrollToLastMessage = () => {
   const messageContainers = document.getElementsByClassName('chatPanelMessage');
-  messageContainers[messageContainers.length-1].scrollIntoView();
+  if (messageContainers.length > 0) {
+    messageContainers[messageContainers.length-1].scrollIntoView();
+  }
 }
 
 let isLightTheme = ref(true);
@@ -51,13 +53,24 @@ const switchTheme = () => {
   document.documentElement.setAttribute("data-theme", isLightTheme.value ? 'light' : 'dark');
 }
 
+const forceUpdate = async () => {
+  shouldRender.value = false;
+  await nextTick();
+  shouldRender.value = true;
+}
+
+const createNewChat = () => {
+  const id = ticketStore.addTicket();
+  ticketStore.selectTicket(id);
+};
+
 onUpdated(() => {
   scrollToLastMessage();
 })
 
 </script>
 <template>
-    <div class="wrapper">
+    <div class="wrapper" v-if="shouldRender">
       <div class="ticketPanel">
         <div class="ticketPanelHeader">
           <div class="logo">
@@ -71,15 +84,18 @@ onUpdated(() => {
           </div>
           <div class="recent">Recent</div>
           <TicketItem v-for="ticket in ticketStore.getTickets()"
+            :id="ticket.id"
             :msg="ticket.name"
             :date="ticket.date"
             :selected="ticketStore.selectedTicket === ticket.id"
-            @click="ticketStore.selectTicket(ticket.id)">
+            @click="ticketStore.selectTicket(ticket.id)"
+            @forceupdate="forceUpdate()"
+          >
           </TicketItem>
         </div>
 
         <div class="ticketPanelToolbar">
-          <div class="newChatButton"></div>
+          <div class="newChatButton" @click="createNewChat()"></div>
         </div>
       </div>
       <div class="chatPanel">
@@ -154,6 +170,8 @@ body {
   width: 48px;
   border-radius: 50%;
   background: var(--message-dark) url('./assets/plus icon.svg') no-repeat center;
+  transition: background-color 0.5s ease;
+  cursor: pointer;
 }
 .newChatButton:hover {
   background-color: var(--message-light);
@@ -161,11 +179,14 @@ body {
 
 .action-icon {
   width: 35px;
-  height: 30px;
+  height: 35px;
   box-sizing: border-box;
   padding: 5px;
   align-content: center;
   margin: auto;
+  transition: background-color 0.5s ease;
+  border-radius: 8px;
+  cursor: pointer;
 }
 .action-icon svg {
   margin: auto;

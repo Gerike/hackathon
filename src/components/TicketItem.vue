@@ -1,6 +1,10 @@
 <script setup>
 import MessageIcon from "@/components/icons/MessageIcon.vue";
 import PlaceHolderIcon from "@/components/icons/TrashIcon.vue";
+import {useTicketStore} from "@/stores/ticket.js";
+
+
+const ticketStore = useTicketStore();
 
 const props = defineProps({
   msg: {
@@ -13,8 +17,14 @@ const props = defineProps({
   },
   selected: {
     type: Boolean
+  },
+  id: {
+    required: true
   }
 });
+
+
+const emit = defineEmits(['forceupdate']);
 
 const CHARACTER_LIMIT = 40;
 
@@ -23,6 +33,11 @@ const createTitle = () => {
     return props.msg;
   }
   return `${props.msg.slice(0, CHARACTER_LIMIT-3)}...`;
+}
+
+const closeConversation = () => {
+  ticketStore.removeTicket(props.id);
+  emit('forceupdate');
 }
 </script>
 
@@ -36,7 +51,7 @@ const createTitle = () => {
         <div class="ticketMessage">{{ createTitle() }}</div>
         <div class="ticketDate">{{ date }}</div>
       </div>
-      <div class="messageIconEnd">
+      <div class="messageIconEnd" @click="closeConversation">
         <place-holder-icon></place-holder-icon>
       </div>
     </div>
@@ -45,8 +60,10 @@ const createTitle = () => {
 
 <style scoped>
 .ticketBox {
+  cursor: pointer;
   width: 318px;
   height: 49px;
+  transition: background-color 0.5s ease;
 }
 
 
@@ -54,7 +71,11 @@ const createTitle = () => {
   align-self: center;
   margin-right: 16px;
   margin-left: auto;
-  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+.messageIconEnd:hover {
+  color: red;
 }
 
 .ticketContentBox {

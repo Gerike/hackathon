@@ -6,6 +6,7 @@ export const useTicketStore = defineStore('ticket', () => {
     const tickets = [];
     const selectedTicket = ref(null);
     const filterWord = ref('');
+    const newId = ref(0);
 
     async function fetchTickets() {
         tickets.splice(0, tickets.length);
@@ -14,6 +15,24 @@ export const useTicketStore = defineStore('ticket', () => {
         tickets.push({ id: 3, name: 'Another download all issue', date: '16:32, 22 June' });
 
         //tickets.push(...await ApiClient.getTickets())
+    }
+
+    function removeTicket(ticketId) {
+        const ticketIndex = tickets.findIndex(ticket => ticket.id == ticketId);
+        if (ticketIndex >= 0) {
+            tickets.splice(ticketIndex, 1);
+            if (ticketId === selectedTicket.value) {
+                selectFirstTicket();
+            }
+        }
+    }
+
+    function addTicket() {
+        const currentDate = new Date();
+        const ticket ={ id: `new-${newId.value}`, name: 'New Chat', date: `${currentDate.getHours()}:${currentDate.getMinutes().toString().padStart(2, '0')}, ${currentDate.getDate()} ${currentDate.toLocaleString('default', { month: 'long' })}` }
+        tickets.push(ticket);
+        newId.value += 1;
+        return ticket.id;
     }
 
     function getSelectedTicket() {
@@ -42,5 +61,5 @@ export const useTicketStore = defineStore('ticket', () => {
         return tickets;
     }
 
-    return { getSelectedTicket, tickets, fetchTickets, selectTicket, selectedTicket, selectFirstTicket, setFilterWord, getTickets }
+    return { addTicket, removeTicket, getSelectedTicket, tickets, fetchTickets, selectTicket, selectedTicket, selectFirstTicket, setFilterWord, getTickets }
 })
