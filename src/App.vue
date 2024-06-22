@@ -182,6 +182,8 @@ body {
   overflow: scroll;
 }
 .chatBoxInput {
+  background: var(--background-light) url("./assets/send icon.svg") no-repeat right;
+  background-position-x: calc(100% - 10px);
   width: 100%;
   box-sizing: border-box;
   align-items: center;
