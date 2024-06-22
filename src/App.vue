@@ -1,6 +1,7 @@
 <script setup>
 
 import TicketItem from "@/components/TicketItem.vue";
+import ChatPanelMessage from "@/components/ChatPanelMessage.vue";
 </script>
 
 <template>
@@ -13,12 +14,24 @@ import TicketItem from "@/components/TicketItem.vue";
           </div>
         </div>
         <div class="ticketPanelTicketList">
-          <TicketItem date="2024.01.01" msg="Ticket 1"></TicketItem>
-          <TicketItem date="2024.01.01" msg="Ticket 2"></TicketItem>
-          <TicketItem date="2024.01.01" msg="Ticket 3"></TicketItem>
+          <TicketItem date="2024.01.01" msg="Ticket 1 title...."></TicketItem>
+          <TicketItem date="2024.01.01" msg="Ticket 2 title...."></TicketItem>
+          <TicketItem date="2024.01.01" msg="Ticket 3 title...."></TicketItem>
         </div>
       </div>
-      <div class="chatPanel">ALMAFA</div>
+      <div class="chatPanel">
+        <div class="chatPanelTitle">
+          <div class="chatPanelTitleMessage">Ticket 1 title</div>
+          <div class="chatPanelTitleDate">14:32, 22 June</div>
+        </div>
+        <div class="chatPanelTextArea">
+          <ChatPanelMessage msg="There is an error message showing when a participant is trying to use the 'download all' button in their briefcase on eLearning"></ChatPanelMessage>
+          <ChatPanelMessage left-align msg="There is some very nice answers..."></ChatPanelMessage>
+        </div>
+        <div class="chatPanelControls">
+          <input type="text" class="chatBoxInput" placeholder="Write your question">
+        </div>
+      </div>
     </div>
 </template>
 <style>
@@ -29,6 +42,41 @@ body {
 
 
 <style scoped>
+.chatPanelTitle {
+  width: 100%;
+  height: 50px;
+  background-color: #D9D9DA;
+  border-bottom: 1px solid black;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.chatPanelTextArea {
+  height: calc(90% - 50px);
+}
+.chatBoxInput {
+  width: 80%;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
+.chatPanelControls {
+  height: calc(10% - 50px);
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  border-top: 1px solid black;
+  background-color: white;
+}
+
+.chatPanelTitleMessage {
+  font-weight: bold;
+}
+
 .wrapper {
   display: flex;
   height: 100vh;
