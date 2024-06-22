@@ -31,19 +31,19 @@ const askQuestion = (e) => {
   ticketStore.selectTicket(selectedTicket);
   e.target.value = '';
 }
-</script>
 
+</script>
 <template>
     <div class="wrapper">
       <div class="ticketPanel">
         <div class="ticketPanelHeader">
           <h3>(Assistive Tech Bot)</h3>
           <div class="search">
-            <input type="text" class="searchTerm" placeholder="Search">
+            <input type="text" class="searchTerm" placeholder="Search" @keyup="e => ticketStore.setFilterWord(e.target.value)">
           </div>
         </div>
         <div class="ticketPanelTicketList">
-          <TicketItem v-for="ticket in ticketStore.tickets"
+          <TicketItem v-for="ticket in ticketStore.getTickets()"
             :msg="ticket.name"
             :date="ticket.date"
             :selected="ticketStore.selectedTicket === ticket.id"

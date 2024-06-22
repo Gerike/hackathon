@@ -4,6 +4,7 @@ import { defineStore } from 'pinia'
 export const useTicketStore = defineStore('ticket', () => {
     const tickets = [];
     const selectedTicket = ref(null);
+    const filterWord = ref('');
 
     async function fetchTickets() {
         tickets.splice(0, tickets.length);
@@ -20,5 +21,19 @@ export const useTicketStore = defineStore('ticket', () => {
         selectedTicket.value = tickets[0].id;
     }
 
-    return { tickets, fetchTickets, selectTicket, selectedTicket, selectFirstTicket }
+    function setFilterWord(newFilterWord) {
+        filterWord.value = newFilterWord;
+    }
+
+    function getTickets() {
+        if (filterWord.value.trim() !== '') {
+            return tickets.filter(ticket => {
+                return ticket.name.toLowerCase().includes(filterWord.value.toLowerCase()) || ticket.date.toLowerCase().includes(filterWord.value.toLowerCase())
+            })
+        }
+
+        return tickets;
+    }
+
+    return { tickets, fetchTickets, selectTicket, selectedTicket, selectFirstTicket, setFilterWord, getTickets }
 })
