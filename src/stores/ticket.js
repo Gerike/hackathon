@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
+import {ApiClient} from "@/lib/api-client.js";
 
 export const useTicketStore = defineStore('ticket', () => {
     const tickets = [];
@@ -11,6 +12,8 @@ export const useTicketStore = defineStore('ticket', () => {
         tickets.push({ id: 1, name: 'Download all issue', date: '14:32, 22 June' });
         tickets.push({ id: 2, name: 'Very very long title so can we trim it after a certain amount of characters?', date: '15:32, 22 June' });
         tickets.push({ id: 3, name: 'Another download all issue', date: '16:32, 22 June' });
+
+        //tickets.push(...await ApiClient.getTickets())
     }
 
     function getSelectedTicket() {
