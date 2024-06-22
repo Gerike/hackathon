@@ -9,12 +9,15 @@ defineProps({
   date: {
     type: String,
     required: true
+  },
+  selected: {
+    type: Boolean
   }
 })
 </script>
 
 <template>
-  <div class="ticketBox">
+  <div class="ticketBox" :class="selected ? 'selected' : ''">
     <div class="messageIcon">
       <icon-community></icon-community>
     </div>
@@ -51,6 +54,11 @@ defineProps({
 
 .ticketMessage {
   font-weight: bold;
+}
+
+.selected {
+  background-color: #6d8dff !important;
+  border-radius: 10px;
 }
 
 </style>
