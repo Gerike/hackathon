@@ -5,6 +5,8 @@ import ChatPanelMessage from "@/components/ChatPanelMessage.vue";
 import {useMessageStore} from "@/stores/message.js";
 import { useTicketStore } from "@/stores/ticket.js";
 import {onUpdated} from "vue";
+import LogoLight from "@/components/icons/LogoFullLight.vue";
+import LogoFullDark from "@/components/icons/LogoFullDark.vue";
 
 const ticketStore = useTicketStore();
 const messageStore = useMessageStore();
@@ -48,7 +50,10 @@ onUpdated(() => {
     <div class="wrapper">
       <div class="ticketPanel">
         <div class="ticketPanelHeader">
-          <h3>(Assistive Tech Bot)</h3>
+          <div class="logo">
+            <logo-full-dark class="logo-svg"></logo-full-dark>
+          </div>
+          <div ></div>
           <div class="search">
             <input type="text" class="searchTerm" placeholder="Search" @keyup="e => ticketStore.setFilterWord(e.target.value)">
           </div>
@@ -89,17 +94,27 @@ body {
 }
 
 :root {
-  --background-dark: #D9D9DA;
+  --background-dark: #F2F2F2;
   --background-light: white;
-  --message-light: #D6F2EE;
+  --message-light: #C5FFF1;
   --message-dark: #289D8C;
-  --highlight: #656565;
-  --border: black;
+  --highlight: #D9D9DA;
+  --border: #D9D9DA;
+  --logo-light: #48FED5;
 }
 </style>
 
 
 <style scoped>
+.logo {
+  background-color: var(--logo-light);
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo-svg {
+  transform: scale(0.5);
+}
 
 .chatPanelTitle {
   width: 100%;
@@ -145,14 +160,14 @@ body {
 
 .ticketPanel {
   margin: 0;
-  flex: 20%;
+  flex: 10%;
   background-color: var(--background-dark);
   border-right: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
 
 .ticketPanelHeader {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--border);
 }
 
 .ticketPanelHeader h3 {
@@ -162,7 +177,8 @@ body {
 }
 
 .search {
-  padding-left: 16px;
+  padding-top: 16px;
+  padding-left: 32px;
   padding-bottom: 16px;
   width: 100%;
   position: relative;

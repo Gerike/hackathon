@@ -1,5 +1,5 @@
 <script setup>
-import IconCommunity from "@/components/icons/IconCommunity.vue";
+import MessageIcon from "@/components/icons/MessageIcon.vue";
 
 const props = defineProps({
   msg: {
@@ -26,7 +26,7 @@ const createTitle = () => {
 <template>
   <div class="ticketBox" :class="selected ? 'selected' : ''">
     <div class="messageIcon">
-      <icon-community></icon-community>
+      <message-icon></message-icon>
     </div>
     <div class="ticketContent">
       <div class="ticketMessage">{{ createTitle() }}</div>
@@ -48,6 +48,7 @@ const createTitle = () => {
 .messageIcon {
   margin: 5px;
   padding: 5px;
+  color: red !important;
 }
 
 .ticketContent {
@@ -55,7 +56,7 @@ const createTitle = () => {
 }
 
 .ticketBox:hover {
-  background-color: var(--highlight);
+  background-color: var(--message-light);
   border-radius: 10px;
 }
 
@@ -64,7 +65,7 @@ const createTitle = () => {
 }
 
 .selected {
-  background-color: #6d8dff !important;
+  background-color: var(--highlight);
   border-radius: 10px;
 }
 
