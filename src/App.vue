@@ -64,8 +64,8 @@ onUpdated(() => {
       </div>
       <div class="chatPanel">
         <div class="chatPanelTitle">
-          <div class="chatPanelTitleMessage">Ticket 1 title</div>
-          <div class="chatPanelTitleDate">14:32, 22 June</div>
+          <div class="chatPanelTitleMessage">{{ ticketStore.getSelectedTicket() ? ticketStore.getSelectedTicket().name : ''}}</div>
+          <div class="chatPanelTitleDate">{{ ticketStore.getSelectedTicket() ? ticketStore.getSelectedTicket().date : '' }}</div>
         </div>
         <div id="chatPanelTextArea" class="chatPanelTextArea">
           <ChatPanelMessage

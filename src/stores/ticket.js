@@ -13,6 +13,10 @@ export const useTicketStore = defineStore('ticket', () => {
         tickets.push({ id: 3, name: 'Another download all issue', date: '16:32, 22 June' });
     }
 
+    function getSelectedTicket() {
+        return tickets.find(ticket => ticket.id === selectedTicket.value);
+    }
+
     function selectTicket(id) {
         selectedTicket.value = id;
     }
@@ -35,5 +39,5 @@ export const useTicketStore = defineStore('ticket', () => {
         return tickets;
     }
 
-    return { tickets, fetchTickets, selectTicket, selectedTicket, selectFirstTicket, setFilterWord, getTickets }
+    return { getSelectedTicket, tickets, fetchTickets, selectTicket, selectedTicket, selectFirstTicket, setFilterWord, getTickets }
 })
