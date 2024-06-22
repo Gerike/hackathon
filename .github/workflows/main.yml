@@ -19,6 +19,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-central-1
 
+      - name: Installing dependencies
+        run: npm install
+
       - name: Building website
         run: npm run build
 
