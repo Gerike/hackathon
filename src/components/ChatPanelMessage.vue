@@ -42,7 +42,7 @@ const ZENDESK_TICKET_URL = 'https://www.zendesk.com/tickets'
       <div class="feedback-button ignore-button"><img alt="external-link" src="../assets/thumbs-down.svg" width="16px"/>Ignore</div>
     </div>
   </div>
-  <div v-else-if="isLoadingMessage" class="messageBox" :class="leftAlign ? 'left-aligned' : 'right-aligned'"><div class="loader"></div>Help is coming</div>
+  <div v-else-if="isLoadingMessage" class="messageBox" :class="leftAlign ? 'left-aligned' : 'right-aligned'"><div class="loader"></div></div>
   <div v-else class="messageBox" :class="leftAlign ? 'left-aligned' : 'right-aligned'">{{ msg }}</div>
 </template>
 
