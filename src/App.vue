@@ -4,6 +4,7 @@ import TicketItem from "@/components/TicketItem.vue";
 import ChatPanelMessage from "@/components/ChatPanelMessage.vue";
 import {useMessageStore} from "@/stores/message.js";
 import { useTicketStore } from "@/stores/ticket.js";
+import {onUpdated} from "vue";
 
 const ticketStore = useTicketStore();
 const messageStore = useMessageStore();
@@ -30,7 +31,17 @@ const askQuestion = (e) => {
   ticketStore.selectTicket(null);
   ticketStore.selectTicket(selectedTicket);
   e.target.value = '';
+  setTimeout(scrollToLastMessage, 50);
 }
+
+const scrollToLastMessage = () => {
+  const messageContainers = document.getElementsByClassName('chatPanelMessage');
+  messageContainers[messageContainers.length-1].scrollIntoView();
+}
+
+onUpdated(() => {
+  scrollToLastMessage();
+})
 
 </script>
 <template>
@@ -56,8 +67,9 @@ const askQuestion = (e) => {
           <div class="chatPanelTitleMessage">Ticket 1 title</div>
           <div class="chatPanelTitleDate">14:32, 22 June</div>
         </div>
-        <div class="chatPanelTextArea">
+        <div id="chatPanelTextArea" class="chatPanelTextArea">
           <ChatPanelMessage
+              class="chatPanelMessage"
               v-for="message in messageStore.messages[ticketStore.selectedTicket]"
               :key="message.message"
               :msg="message.message"

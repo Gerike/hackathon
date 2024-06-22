@@ -1,7 +1,7 @@
 <script setup>
 import IconCommunity from "@/components/icons/IconCommunity.vue";
 
-defineProps({
+const props = defineProps({
   msg: {
     type: String,
     required: true
@@ -14,6 +14,13 @@ defineProps({
     type: Boolean
   }
 })
+
+const createTitle = () => {
+  if (props.msg.length < 20) {
+    return props.msg;
+  }
+  return `${props.msg.slice(0, 17)}...`;
+}
 </script>
 
 <template>
@@ -22,7 +29,7 @@ defineProps({
       <icon-community></icon-community>
     </div>
     <div class="ticketContent">
-      <div class="ticketMessage">{{ msg }}</div>
+      <div class="ticketMessage">{{ createTitle() }}</div>
       <div class="ticketDate">{{ date }}</div>
     </div>
   </div>
