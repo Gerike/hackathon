@@ -7,6 +7,7 @@ import { useTicketStore } from "@/stores/ticket.js";
 import {onUpdated} from "vue";
 import LogoFullDark from "@/components/icons/LogoFullDark.vue";
 import MessageIcon from "@/components/icons/MessageIcon.vue";
+import PlaceHolderIcon from "@/components/icons/PlaceHolderIcon.vue";
 
 const ticketStore = useTicketStore();
 const messageStore = useMessageStore();
@@ -69,14 +70,16 @@ onUpdated(() => {
       </div>
       <div class="chatPanel">
         <div class="chatPanelTitle">
-          <div class="chatPanelHeader">
               <div class="messageIcon">
                 <message-icon></message-icon>
               </div>
               <div class="chatPanelTitleMessage">{{ ticketStore.getSelectedTicket() ? ticketStore.getSelectedTicket().name : ''}}</div>
-              <div class="chatPanelTitleDate">{{ ticketStore.getSelectedTicket() ? ticketStore.getSelectedTicket().date : '' }}</div>
+          <div class="chatPanelSettings">
+            <div class="action-icon"><place-holder-icon></place-holder-icon></div>
+            <div class="action-icon"><place-holder-icon></place-holder-icon></div>
+            <div class="action-icon"><place-holder-icon></place-holder-icon></div>
           </div>
-        </div>
+          </div>
         <div id="chatPanelTextArea" class="chatPanelTextArea">
           <ChatPanelMessage
               class="chatPanelMessage"
@@ -96,6 +99,7 @@ onUpdated(() => {
 <style>
 body {
   margin: 0;
+  font-family: 'Inter', sans-serif;;
 }
 
 :root {
@@ -110,8 +114,21 @@ body {
 }
 </style>
 
-
 <style scoped>
+.action-icon {
+  width: 35px;
+  height: 30px;
+  box-sizing: border-box;
+  padding: 5px;
+  align-content: center;
+  margin: auto;
+}
+.action-icon svg {
+  margin: auto;
+}
+.action-icon:hover {
+  background-color: #48FED5;
+}
 .logo {
   padding-left: 10px;
   background-color: var(--logo-light);
@@ -128,19 +145,26 @@ body {
   line-height: 17px;
   color: var(--text-color-light);
 }
-
+.messageIcon {
+  align-self: center;
+  margin-right: 12px;
+}
 .chatPanelTitle {
+  box-sizing: border-box;
   display: flex;
   width: 100%;
   height: 65px;
   background-color: var(--background-dark);
   border-bottom: var(--border);
+  padding: 8px 20px 8px 20px;
 }
 
-.chatPanelHeader {
-  padding: 8px 20px 8px 20px;
+.chatPanelSettings {
+  align-self: center;
+  margin-right: 0;
+  margin-left: auto;
+  flex-direction: row;
   display: flex;
-  flex-basis: 50%;
 }
 
 .chatPanelTextArea {
@@ -172,10 +196,7 @@ body {
 
 .chatPanelTitleMessage {
   font-weight: 600;
-}
-
-.chatPanelTitleDate {
-  font-weight: 400;
+  align-self: center;
 }
 
 .wrapper {
