@@ -74,6 +74,10 @@ onUpdated(() => {
             @click="ticketStore.selectTicket(ticket.id)">
           </TicketItem>
         </div>
+
+        <div class="ticketPanelToolbar">
+          <div class="newChatButton"></div>
+        </div>
       </div>
       <div class="chatPanel">
         <div class="chatPanelTitle">
@@ -122,6 +126,25 @@ body {
 </style>
 
 <style scoped>
+.ticketPanelToolbar{
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 12px 20px 0px 20px;
+}
+
+.newChatButton {
+  margin-left: auto;
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  background: var(--message-dark) url('./assets/plus icon.svg') no-repeat center;
+}
+.newChatButton:hover {
+  background-color: var(--message-light);
+}
+
 .action-icon {
   width: 35px;
   height: 30px;
@@ -224,6 +247,8 @@ body {
 
 .ticketPanelList {
   padding: 16px;
+  box-sizing: border-box;
+  height: calc(100% - 65px - 72px);
 }
 
 
