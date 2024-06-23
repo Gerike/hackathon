@@ -7,7 +7,6 @@ export const useMessageStore = defineStore('message', () => {
   const sessionId = ref(null);
 
   async function addMessage(ticketId, message) {
-
     if (!messages[ticketId]) {
       messages[ticketId] = [];
     }

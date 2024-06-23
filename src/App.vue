@@ -38,12 +38,15 @@ ticketStore.fetchTickets().then(() => {
 
 
 const askQuestion = async (e) => {
-  const question = e.target.value;
+  let question = e.target.value;
   messageStore.addMessage(ticketStore.selectedTicket, { fromBot: false, message: question });
   messageStore.addLoadingMessage(ticketStore.selectedTicket);
   e.target.value = '';
   forceUpdate();
 
+  if (question === 'Can you help me solve this ticket?') {
+    question = ticketStore.getSelectedTicket().description;
+  }
   const response = await ApiClient.sendQuestion(question);
   messageStore.addMessage(ticketStore.selectedTicket, { fromBot: true, message: response.answer });
 

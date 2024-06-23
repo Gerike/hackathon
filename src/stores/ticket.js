@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import {ApiClient} from "@/lib/api-client.js";
+import {useMessageStore} from "@/stores/message.js";
 
 export const useTicketStore = defineStore('ticket', () => {
     const tickets = [];
@@ -50,7 +51,7 @@ export const useTicketStore = defineStore('ticket', () => {
     }
 
     function selectFirstTicket() {
-        selectedTicket.value = tickets[0].id;
+        selectTicket(tickets[0].id);
     }
 
     function setFilterWord(newFilterWord) {
