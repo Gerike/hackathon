@@ -55,7 +55,7 @@ a, a:hover, a:visited {
 }
 
 .loader {
-  width: 60px;
+  width: 26px;
   aspect-ratio: 4;
   --_g: no-repeat radial-gradient(circle closest-side,#000 90%,#0000);
   background:
