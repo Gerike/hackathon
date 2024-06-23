@@ -33,12 +33,17 @@ messageStore.addMessage(3, { fromBot: true, message: 'Praesent nec diam maximus,
 
 
 
-const askQuestion = (e) => {
+const askQuestion = async (e) => {
   const question = e.target.value;
   messageStore.addMessage(ticketStore.selectedTicket, { fromBot: false, message: question });
   messageStore.addLoadingMessage(ticketStore.selectedTicket);
-  forceUpdate();
   e.target.value = '';
+  forceUpdate();
+
+  const response = await ApiClient.sendQuestion(question);
+  messageStore.addMessage(ticketStore.selectedTicket, { fromBot: true, message: response.answer });
+  console.log(response);
+  forceUpdate();
   setTimeout(scrollToLastMessage, 50);
 }
 

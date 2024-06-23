@@ -21,7 +21,6 @@ export class ApiClient {
     static async sendQuestion(question, sessionId = null) {
         const response = await fetch(`${BASE_URL}/get-response/`, {
             method: 'POST',
-            mode: "no-cors",
             body: JSON.stringify({
                 session_id: sessionId,
                 input_text: question
@@ -31,9 +30,7 @@ export class ApiClient {
                 "Authorization": SECRET
             },
         });
-
         const data = await response.json()
-
         return data.data;
     }
 
