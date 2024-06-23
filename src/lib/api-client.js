@@ -1,12 +1,12 @@
 const BASE_URL = 'https://api.assisteve.com';
-const SECRET = localStorage.getItem('secret');
+const SECRET = localStorage.getItem('api-key');
 
 export class ApiClient {
 
     static async getTickets() {
         const response = await fetch(`${BASE_URL}/zendesk-tickets/`, {
             method: 'GET',
-            mode: "no-cors",
+            mode: "cors",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": SECRET
