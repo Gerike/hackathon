@@ -37,7 +37,7 @@ const ZENDESK_TICKET_URL = 'https://www.zendesk.com/tickets'
 <template>
   <div v-if="isFeedbackMessage" class="messageBox" :class="leftAlign ? 'left-aligned' : 'right-aligned'">
     <div class="link-container" v-for="ticket in relevantTickets">
-      <div class="link">●  #{{ ticket.id }}: <a target="_blank" :href="`${ZENDESK_TICKET_URL}/${ticket.id}`" ><strong>{{ ticket.title }}</strong> <img alt="external-link" src="../assets/external-link.svg" width="16px"/></a></div>
+      <div class="link">•  #{{ ticket.id }}: <a target="_blank" :href="`${ZENDESK_TICKET_URL}/${ticket.id}`" ><strong>{{ ticket.title }}</strong> <img alt="external-link" src="../assets/external-link.svg" width="16px"/></a></div>
       <div class="feedback-button approve-button"><img alt="external-link" src="../assets/thumbs-up.svg" width="16px"/>Approve</div>
       <div class="feedback-button ignore-button"><img alt="external-link" src="../assets/thumbs-down.svg" width="16px"/>Ignore</div>
     </div>
