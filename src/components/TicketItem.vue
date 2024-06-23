@@ -26,7 +26,7 @@ const props = defineProps({
 
 const emit = defineEmits(['forceupdate']);
 
-const CHARACTER_LIMIT = 40;
+const CHARACTER_LIMIT = 35;
 
 const createTitle = () => {
   if (props.msg.length < CHARACTER_LIMIT) {
