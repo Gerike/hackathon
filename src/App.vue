@@ -46,7 +46,7 @@ const askQuestion = async (e) => {
 
   const response = await ApiClient.sendQuestion(question);
   messageStore.addMessage(ticketStore.selectedTicket, { fromBot: true, message: response.answer });
-  console.log(response);
+
   forceUpdate();
   setTimeout(scrollToLastMessage, 50);
 }

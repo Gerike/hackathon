@@ -20,7 +20,6 @@ export const useTicketStore = defineStore('ticket', () => {
             return { id: index, name: ticket.subject, description: ticket.description, date: `${creationDate.getHours()}:${creationDate.getMinutes().toString().padStart(2, '0')}, ${creationDate.getDate()} ${creationDate.toLocaleString('default', { month: 'long' })}` }
         })));
 
-        console.log(t);
         //tickets.push(...await ApiClient.getTickets())
     }
 
