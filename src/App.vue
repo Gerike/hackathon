@@ -23,9 +23,9 @@ ticketStore.fetchTickets().then(() => {
 
 
 
-// messageStore.addMessage(1, { fromBot: false, message: 'There is an error message showing when a participant is trying to use the "download all" button in their briefcase on eLearning'} );
-// messageStore.addMessage(1, { fromBot: true, message: 'Some very nice and detailed answer...'});
-// messageStore.addMessage(1, { fromBot: true, message: 'feedback\n12345 Title of the first relevant ticket\n23456 Title of the relevant second ticket'});
+messageStore.addMessage(0, { fromBot: false, message: 'There is an error message showing when a participant is trying to use the "download all" button in their briefcase on eLearning'} );
+messageStore.addMessage(0, { fromBot: true, message: 'Some very nice and detailed answer...'});
+messageStore.addMessage(0, { fromBot: true, message: 'feedback\n12345 Title of the first relevant ticket\n23456 Title of the relevant second ticket'});
 //
 // messageStore.addMessage(2, { fromBot: false, message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tellus est, interdum non arcu nec, convallis interdum tortor. Ut malesuada enim a vestibulum cursus. Etiam consectetur porttitor eros ac rhoncus. Suspendisse nec dignissim magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis arcu purus, vitae tristique elit pharetra bibendum. Aenean a erat erat. Mauris facilisis nisi libero, eu auctor arcu posuere quis. In ullamcorper augue non quam mollis aliquam. In eget nisi efficitur, pharetra ante ac, luctus felis. Curabitur malesuada eros eget massa condimentum, vel vulputate nunc facilisis. Nulla pellentesque nunc id urna viverra cursus.'});
 // messageStore.addMessage(2, { fromBot: true, message: 'Praesent nec diam maximus, placerat turpis quis, blandit tellus. Curabitur at placerat arcu. Integer pellentesque elit et risus tristique, vel egestas arcu laoreet. Ut faucibus auctor neque, nec venenatis odio eleifend a. Vivamus porttitor nulla sed nisi ultrices consequat. Integer nibh ante, porta et egestas eu, tincidunt sed magna. Nulla eu elementum turpis.'});
