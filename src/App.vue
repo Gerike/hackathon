@@ -79,6 +79,15 @@ const createNewChat = () => {
   ticketStore.selectTicket(id);
 };
 
+const selectTicket = (id) => {
+  if (!messageStore.messages[id]) {
+    const ticket = ticketStore.tickets.find(ticket => ticket.id === id);
+    messageStore.addMessage(id, { fromBot: false, message: ticket.description });
+  }
+
+  ticketStore.selectTicket(id)
+}
+
 onUpdated(() => {
   scrollToLastMessage();
 })
@@ -103,7 +112,7 @@ onUpdated(() => {
             :msg="ticket.name"
             :date="ticket.date"
             :selected="ticketStore.selectedTicket === ticket.id"
-            @click="ticketStore.selectTicket(ticket.id)"
+            @click="selectTicket(ticket.id)"
             @forceupdate="forceUpdate()"
           >
           </TicketItem>
