@@ -71,6 +71,8 @@ onUpdated(() => {
   scrollToLastMessage();
 })
 
+ApiClient.getTickets()
+
 </script>
 <template>
     <div class="wrapper" v-if="shouldRender">

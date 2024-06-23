@@ -1,15 +1,16 @@
 const BASE_URL = 'https://api.assisteve.com';
-const SECRET = '9cd784e1-9535-4e9c-9b91-75cf3b2fa24c';
+const SECRET = localStorage.getItem('secret');
 
 export class ApiClient {
 
     static async getTickets() {
         const response = await fetch(`${BASE_URL}/zendesk-tickets/`, {
-            method: 'POST',
+            method: 'GET',
             mode: "no-cors",
-            body: JSON.stringify({
-                'auth_token': SECRET
-            })
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": SECRET
+            },
         });
 
         const data = await response.json()
@@ -22,14 +23,31 @@ export class ApiClient {
             method: 'POST',
             mode: "no-cors",
             body: JSON.stringify({
-                'auth_token': SECRET,
                 session_id: sessionId,
                 input_text: question
-            })
+            }),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": SECRET
+            },
         });
 
         const data = await response.json()
 
         return data.data;
+    }
+
+    static async ignoreTicket(ticketId) {
+        await fetch(`${BASE_URL}/ignore-ticket/`, {
+            method: 'POST',
+            mode: "no-cors",
+            body: JSON.stringify({
+                ticket_id: ticketId
+            }),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": SECRET
+            },
+        });
     }
 }
