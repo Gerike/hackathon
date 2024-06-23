@@ -45,7 +45,7 @@ const askQuestion = async (e) => {
   forceUpdate();
 
   if (question === 'Can you help me solve this ticket?') {
-    question = ticketStore.getSelectedTicket().description;
+    question = ticketStore.getSelectedTicket().name;
   }
   const response = await ApiClient.sendQuestion(question);
   messageStore.addMessage(ticketStore.selectedTicket, { fromBot: true, message: response.answer });
